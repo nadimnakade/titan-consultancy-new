@@ -43,3 +43,17 @@ sidebarLinks.forEach((link)=>{
         sideBar.classList.add('close-sidebar');
     })
 });
+
+// Pause autoplay videos when offscreen
+const autoVideos = document.querySelectorAll('.back-vid, .blackhole-box video, .skills-video, .info-section video');
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach((entry)=>{
+    const v = entry.target;
+    if (entry.isIntersecting) {
+      v.play().catch(()=>{});
+    } else {
+      v.pause();
+    }
+  });
+}, { threshold: 0.25 });
+autoVideos.forEach(v=>observer.observe(v));
