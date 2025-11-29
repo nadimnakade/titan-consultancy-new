@@ -1,0 +1,84 @@
+/* === primary btn scss (index 01) === */
+.rr-btn-green {
+  z-index: 5;
+  font-size: 18px;
+  overflow: hidden;
+  font-weight: 500;
+  line-height: 28px;
+  position: relative;
+  padding: 18px 31px;
+  align-items: center;
+  display: inline-flex;
+  border-radius: 500px;
+  letter-spacing: -0.48px;
+  justify-content: center;
+  text-transform: uppercase;
+  font-family: var(--font_bai);
+  background-color: var(--green);
+
+  &:hover,
+  &:focus {
+    &::before {
+      height: 100%;
+    }
+
+    .btn-wrap {
+      .text-one {
+        transform: translateY(-150%);
+      }
+
+      .text-two {
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--white);
+      }
+    }
+  }
+
+  &:after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+
+  &::before {
+    background-color: var(--red);
+    content: "";
+    width: 100%;
+    height: 0;
+    bottom: 0;
+    position: absolute;
+    transition: all 0.5s;
+  }
+
+  .btn-wrap {
+    z-index: 1;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    border: none;
+
+    .text-one,
+    .text-two {
+      gap: 6px;
+      display: flex;
+      align-items: center;
+    }
+
+    .text-one {
+      position: relative;
+      color: var(--primary);
+      transition: all 0.5s;
+    }
+
+    .text-two {
+      top: 100%;
+      position: absolute;
+      color: var(--white);
+      transition: all 0.5s;
+    }
+  }
+
+
+}

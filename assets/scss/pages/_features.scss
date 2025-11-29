@@ -1,0 +1,180 @@
+.future {
+    .section-title {
+        &__wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+
+            .sub-title {
+                color: #000;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 26px;
+                text-align: center;
+                display: inline-block;
+                border-radius: 500px;
+                margin-bottom: 16px;
+                padding: 5px 18px;
+                background: var(--white);
+            }
+
+            .title {
+                color: #FFF;
+                font-size: 56px;
+                font-weight: 700;
+                line-height: 64px;
+                text-align: center;
+
+                @media #{$md} {
+                    font-size: 50px;
+                    line-height: 60px;
+                }
+            }
+        }
+    }
+
+    .future-top {
+        gap: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: -26px;
+        position: relative;
+        z-index: 1;
+
+        @media #{$lg} {
+            gap: 10px;
+            margin-bottom: -10px;
+        }
+
+        @media #{$sm} {
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        @media #{$xs} {
+            flex-wrap: wrap;
+        }
+
+        &__item {
+            width: 256px;
+            height: 256px;
+            min-width: 256px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 500px;
+            justify-content: center;
+            background: linear-gradient(180deg, #FFF 0%, #41F681 100%);
+
+            @media #{$xxl} {
+                width: 200px;
+                height: 200px;
+                min-width: 200px;
+            }
+
+            @media #{$xl} {
+                width: 180px;
+                height: 180px;
+                min-width: 180px;
+            }
+
+            @media #{$lg} {
+                width: 150px;
+                height: 150px;
+                min-width: 150px;
+            }
+
+            @media #{$xs} {
+                width: 120px;
+                height: 120px;
+                min-width: 120px;
+            }
+
+            img {
+                @media #{$xs} {
+                    max-width: 70px;
+                }
+            }
+        }
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 28px;
+        text-align: center;
+        color: var(--primary);
+        text-transform: capitalize;
+
+        @media #{$xxl} {
+            font-size: 15px;
+            line-height: 25px;
+        }
+
+        @media #{$xl} {
+            display: none;
+        }
+    }
+
+    .future-bottom {
+        gap: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+
+        @media #{$lg} {
+            gap: 10px;
+        }
+
+        @media #{$md} {
+            flex-wrap: wrap;
+        }
+
+        &__item {
+            width: 256px;
+            height: 256px;
+            min-width: 256px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 500px;
+            justify-content: center;
+            background: linear-gradient(180deg, #FFF 0%, #41F681 100%);
+
+            @media #{$xxl} {
+                width: 200px;
+                height: 200px;
+                min-width: 200px;
+            }
+
+            @media #{$xl} {
+                width: 180px;
+                height: 180px;
+                min-width: 180px;
+            }
+
+            @media #{$lg} {
+                width: 150px;
+                height: 150px;
+                min-width: 150px;
+            }
+
+            @media #{$xs} {
+                width: 120px;
+                height: 120px;
+                min-width: 120px;
+            }
+
+            img {
+                @media #{$xs} {
+                    max-width: 70px;
+                }
+            }
+        }
+    }
+}
