@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QuantumSphere IT Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap 5 -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+  .back-vid{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: -2; /* keep behind starfield */
+  }
+
+  /* WHY US – two columns with vertical divider */
+  .why-wrapper {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  .why-col {
+    font-size: 0.9rem;
+    color: rgba(226, 232, 240, 0.92);
+  }
+
+  .why-col h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .why-col h4 {
+    font-size: 1rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+
+  .why-col p {
+    margin-bottom: 0.7rem;
+  }
+
+  /* desktop split + vertical line */
+  @media (min-width: 992px) {
+    .why-wrapper {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .why-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        rgba(55, 65, 81, 0),
+        rgba(148, 163, 184, 0.75),
+        rgba(55, 65, 81, 0)
+      );
+      transform: translateX(-0.5px);
+    }
+
+    .why-col:first-child {
+      padding-right: 2rem;
+    }
+
+    .why-col:last-child {
+      padding-left: 2rem;
+    }
+  }
+
+  :root {
+    --bg-main: #020012;
+    --bg-alt: #050015;
+    --accent: #22f2ff;   /* neon cyan  */
+    --accent-2: #a855f7; /* neon purple */
+    --accent-3: #ff5ea8; /* neon pink   */
+    --accent-4: #38bdf8; /* electric blue */
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --glass: rgba(6, 10, 32, 0.9);
+    --border-glass: rgba(110, 231, 183, 0.3);
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+	background: black;
+    font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    <!-- background: -->
+      <!-- radial-gradient(circle at 15% 0%, #1e1b4b 0, #020012 40%, #000 100%); -->
+    background:#000;	  
+    color: var(--text-main);
+    overflow-x: hidden;
+    position: relative; /* needed for ::before / ::after */
+  }
+
+  /* Galaxy starfield background */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    inset: -50%;
+    pointer-events: none;
+    z-index: -1;
+    background-repeat: repeat;
+  }
+
+  /* nearer stars */
+  body::before {
+    background-image:
+      radial-gradient(1px 1px at 10px 20px, #ffffff, transparent 60%),
+      radial-gradient(1px 1px at 80px 120px, #f9a8d4, transparent 60%),
+      radial-gradient(1px 1px at 130px 40px, #22f2ff, transparent 60%),
+      radial-gradient(2px 2px at 160px 90px, #a855f7, transparent 60%);
+    background-size: 220px 220px;
+    opacity: 0.55;
+    animation: starsDrift1 140s linear infinite;
+  }
+
+  /* further stars */
+  body::after {
+    background-image:
+      radial-gradient(1px 1px at 40px 30px, #22f2ff, transparent 60%),
+      radial-gradient(1px 1px at 120px 160px, #4f46e5, transparent 60%),
+      radial-gradient(1px 1px at 200px 80px, #f97316, transparent 60%);
+    background-size: 260px 260px;
+    opacity: 0.3;
+    animation: starsDrift2 220s linear infinite;
+  }
+
+  @keyframes starsDrift1 {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(200px, 200px, 0); }
+  }
+
+  @keyframes starsDrift2 {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-200px, -150px, 0); }
+  }
+
+  /* circular icons for content blocks */
+  .info-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: conic-gradient(
+      from 180deg,
+      #22f2ff,
+      #a855f7,
+      #ff5ea8,
+      #22f2ff
+    );
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #020012;
+    margin-bottom: 1rem;
+    margin-right: 0.6rem;
+    box-shadow:
+      0 0 12px rgba(34, 242, 255, 0.9),
+      0 0 28px rgba(168, 85, 247, 0.9);
+  }
+
+  /* vertical neon pill accent */
+  .neon-pill {
+    width: 18px;
+    height: 140px;
+    border-radius: 999px;
+    background: linear-gradient(to bottom, #a855f7, #4f46e5, #22f2ff);
+    box-shadow:
+      0 0 12px rgba(168, 85, 247, 0.9),
+      0 0 32px rgba(34, 242, 255, 0.9);
+  }
+
+  .neon-pill-soft {
+    width: 10px;
+    height: 80px;
+    border-radius: 999px;
+    background: linear-gradient(to bottom, #22f2ff, #a855f7);
+    box-shadow:
+      0 0 8px rgba(34, 242, 255, 0.9),
+      0 0 18px rgba(168, 85, 247, 0.9);
+  }
+
+  a { text-decoration: none; }
+
+  /* NAVBAR */
+  .navbar {
+    background: linear-gradient(120deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.8));
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border-glass);
+  }
+
+  .navbar-brand {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .brand-logo {
+    width: 26px;
+    height: 26px;
+    border-radius: 10px;
+    background: conic-gradient(
+      from 90deg,
+      var(--accent),
+      var(--accent-2),
+      var(--accent-3),
+      var(--accent)
+    );
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.9);
+    transform: rotate3d(1, 1, 0, 25deg);
+  }
+
+  .nav-link {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    color: rgba(226, 232, 240, 0.85) !important;
+  }
+
+  .nav-link:hover {
+    color: #fff !important;
+  }
+
+  .btn-cta {
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    color: #020012;
+    font-weight: 600;
+    box-shadow: 0 16px 40px rgba(56, 189, 248, 0.6);
+    padding-inline: 1.4rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+
+  .btn-cta:hover {
+    transform: translateY(-1px) scale(1.02);
+    filter: brightness(1.06);
+    box-shadow: 0 20px 60px rgba(56, 189, 248, 0.8);
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-gradient-bg {
+    position: absolute;
+    inset: -30%;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(34, 211, 238, 0.15), transparent 55%),
+      radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.16), transparent 45%),
+      radial-gradient(circle at 50% 100%, rgba(249, 115, 22, 0.18), transparent 50%);
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+        rgba(148, 163, 184, 0.06) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(circle at top, #000 0, transparent 70%);
+    opacity: 0.6;
+  }
+
+  .hero .container { position: relative; z-index: 2; }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 3vw + 1rem, 3.4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .gradient-text {
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero-subtitle {
+    color: rgba(226, 232, 240, 0.8);
+    max-width: 480px;
+    font-size: 0.98rem;
+  }
+
+  .hero-badges span {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.17em;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    background: rgba(15, 23, 42, 0.9);
+    color: rgba(226, 232, 240, 0.9);
+  }
+
+  .hero-3d {
+    position: relative;
+    height: 420px;
+    max-height: 75vh;
+  }
+
+  #heroCanvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    background: radial-gradient(circle at top, #020617 0, #000 45%, #020617 100%);
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.95);
+  }
+
+  .hero-hint {
+    position: absolute;
+    bottom: 14px;
+    right: 16px;
+    font-size: 0.7rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.96);
+    color: rgba(209, 213, 219, 0.85);
+  }
+
+  /* SECTIONS */
+  .section { padding: 5rem 0; }
+
+  .section-heading {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-heading h2 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-heading p {
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .bg-alt {
+    background: radial-gradient(circle at top left, #020012 0, #000 75%);
+  }
+
+  /* SERVICES (tilt cards) */
+  .service-card {
+    background: radial-gradient(circle at top left,
+                rgba(34, 242, 255, 0.12),
+                rgba(15, 23, 42, 0.96));
+    border-radius: 20px;
+    padding: 1.7rem 1.4rem;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    box-shadow:
+      0 0 0 1px rgba(15, 23, 42, 1),
+      0 18px 50px rgba(8, 47, 73, 0.95);
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background 0.2s ease-out;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(circle at top, rgba(244, 114, 182, 0.22), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .service-card:hover::before { opacity: 1; }
+
+  .service-card:hover {
+    box-shadow:
+      0 0 0 1px rgba(244, 114, 182, 0.6),
+      0 24px 70px rgba(8, 47, 73, 1);
+    background: radial-gradient(circle at top left,
+                rgba(244, 114, 182, 0.25),
+                rgba(15, 23, 42, 0.98));
+  }
+
+  .service-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+    background: conic-gradient(
+      from 180deg,
+      #22f2ff,
+      #a855f7,
+      #ff5ea8,
+      #22f2ff
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: #020012;
+    margin-bottom: 1rem;
+    transform: translateZ(20px);
+    box-shadow:
+      0 0 12px rgba(34, 242, 255, 0.9),
+      0 0 30px rgba(168, 85, 247, 0.9);
+  }
+
+  .service-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .service-desc {
+    color: rgba(226, 232, 240, 0.8);
+    font-size: 0.9rem;
+  }
+
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.8rem;
+  }
+
+  .service-tags span {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    padding: 0.2rem 0.6rem;
+    color: rgba(209, 213, 219, 0.9);
+  }
+
+  /* ABOUT (parallax bg) */
+  .about { position: relative; overflow: hidden; }
+
+  .about-bg {
+    position: absolute;
+    inset: -40%;
+    background-image: url("https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.18;
+    filter: saturate(1.2);
+    transform: translateY(0);
+    transition: transform 0.2s ease-out;
+    pointer-events: none;
+  }
+
+  .about .container { position: relative; z-index: 2; }
+
+  .about-pill {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .about-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.2rem;
+  }
+
+  .stat-box {
+    padding: 0.7rem 1.1rem;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    min-width: 120px;
+    text-align: left;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .stat-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 55px rgba(15, 23, 42, 1);
+  }
+
+  .stat-number {
+    font-size: 1.4rem;
+    font-weight: 600;
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(209, 213, 219, 0.9);
+  }
+
+  /* About orbit */
+  .about-orbit-wrapper { display: flex; justify-content: center; }
+
+  .about-orbit {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    border: 1px dashed rgba(148, 163, 184, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 60%);
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.98);
+    transform-style: preserve-3d;
+    animation: tiltOrbit 16s ease-in-out infinite alternate;
+  }
+
+  .about-orbit-inner {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    border: 1px solid rgba(148, 163, 184, 0.55);
+    position: relative;
+    animation: rotateOrbit 22s linear infinite;
+  }
+
+  .orbit-node {
+    position: absolute;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.8);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(226, 232, 240, 0.95);
+    white-space: nowrap;
+  }
+
+  .orbit-node.main {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    color: #020617;
+    font-weight: 600;
+    box-shadow: 0 20px 45px rgba(56, 189, 248, 0.7);
+  }
+
+  .orbit-node.n1 { top: 2%; left: 50%; transform: translateX(-50%); }
+  .orbit-node.n2 { right: -4%; top: 50%; transform: translateY(-50%); }
+  .orbit-node.n3 { bottom: 10%; left: -4%; }
+
+  @keyframes rotateOrbit {
+    from { transform: rotate3d(0, 0, 1, 0deg); }
+    to   { transform: rotate3d(0, 0, 1, 360deg); }
+  }
+
+  @keyframes tiltOrbit {
+    0%   { transform: rotate3d(1, 0, 0, 18deg) rotate3d(0, 1, 0, -18deg); }
+    100% { transform: rotate3d(1, 0, 0, -14deg) rotate3d(0, 1, 0, 18deg); }
+  }
+
+  /* GENERIC INFO BLOCKS (Experience / Approach / Why Us) */
+  .info-section {
+    background: #020012;
+  }
+
+  .info-block {
+    background: radial-gradient(circle at top left,
+                rgba(34, 242, 255, 0.16),
+                rgba(15, 23, 42, 0.96));
+    border-radius: 18px;
+    padding: 1.6rem 1.4rem;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    box-shadow:
+      0 0 0 1px rgba(15, 23, 42, 1),
+      0 18px 45px rgba(8, 47, 73, 0.98);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    height: 100%;
+  }
+
+  .info-block:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 0 0 1px rgba(244, 114, 182, 0.6),
+      0 22px 70px rgba(8, 47, 73, 1);
+    background: radial-gradient(circle at top,
+                rgba(244, 114, 182, 0.25),
+                rgba(15, 23, 42, 0.98));
+  }
+
+  .info-block h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .info-block h4 {
+    font-size: 1rem;
+    margin-top: 1.4rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .info-block p {
+    font-size: 0.9rem;
+    color: rgba(226, 232, 240, 0.92);
+  }
+
+  .info-block ul {
+    font-size: 0.9rem;
+    padding-left: 1.1rem;
+    color: rgba(226, 232, 240, 0.92);
+  }
+
+  .info-block ul li { margin-bottom: 0.25rem; }
+
+  /* WHY US cards (unused but kept) */
+  .why-card {
+    background: rgba(15, 23, 42, 0.95);
+    border-radius: 18px;
+    padding: 1.6rem 1.4rem;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    height: 100%;
+  }
+
+  .why-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 60px rgba(15, 23, 42, 1);
+  }
+
+  .why-card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .why-card p {
+    font-size: 0.9rem;
+    color: rgba(226, 232, 240, 0.92);
+  }
+
+  /* TESTIMONIALS */
+  .testimonial-card {
+    background: radial-gradient(circle at top left, rgba(34, 211, 238, 0.18), #020017);
+    border-radius: 20px;
+    padding: 1.6rem;
+    border: 1px solid rgba(148, 163, 184, 0.55);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 60px rgba(15, 23, 42, 1);
+  }
+
+  .testimonial-card::before {
+    content: "“";
+    position: absolute;
+    top: -40px;
+    right: 12px;
+    font-size: 7rem;
+    color: rgba(37, 99, 235, 0.1);
+    font-family: Georgia, "Times New Roman", serif;
+  }
+
+  .testimonial-quote {
+    font-size: 0.9rem;
+    color: rgba(226, 232, 240, 0.96);
+  }
+
+  .testimonial-name {
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+
+  .testimonial-role {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* CONTACT */
+  .contact-card {
+    background: rgba(15, 23, 42, 0.97);
+    border-radius: 20px;
+    padding: 1.8rem;
+    border: 1px solid rgba(148, 163, 184, 0.55);
+    box-shadow: 0 20px 55px rgba(15, 23, 42, 0.98);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 60px rgba(15, 23, 42, 1);
+  }
+
+  .form-control {
+    background-color: rgba(15, 23, 42, 0.9);
+    border-radius: 0.9rem;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    color: #e5e7eb;
+  }
+
+  .form-control:focus {
+    background-color: rgba(15, 23, 42, 0.98);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+    color: #f9fafb;
+  }
+
+  .contact-info li {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    color: rgba(226, 232, 240, 0.9);
+  }
+
+  .contact-info span {
+    font-weight: 500;
+    margin-right: 0.4rem;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(148, 163, 184, 0.5);
+    padding: 1rem 0;
+    background: #020012;
+    font-size: 0.8rem;
+    color: rgba(148, 163, 184, 0.9);
+  }
+
+  /* SCROLL ANIMATIONS */
+  [data-anim] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+
+  [data-anim].show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  [data-anim="left"]  { transform: translateX(-40px); }
+  [data-anim="right"] { transform: translateX(40px); }
+  [data-anim="zoom"]  { transform: scale(0.9); }
+
+  [data-anim="left"].show,
+  [data-anim="right"].show,
+  [data-anim="zoom"].show {
+    transform: none;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 991.98px) {
+    .hero { padding-top: 5rem; }
+    .hero-3d { margin-top: 2rem; height: 320px; }
+    .section { padding: 3.5rem 0; }
+  }
+
+  @media (max-width: 575.98px) {
+    .hero-title { font-size: 2rem; }
+  }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container py-2">
+      <a class="navbar-brand" href="#hero">
+        <div class="brand-logo"></div>
+        QuantumSphere
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNav"
+        aria-controls="mainNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+        <ul class="navbar-nav align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#approach">Our Approach</a></li>
+          <li class="nav-item"><a class="nav-link" href="#whyus">Why Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonials">Clients</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="btn btn-cta btn-sm" href="#contact">Book a Call</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <video class="back-vid" autoplay loop muted plays-inline preload="none" src="videos/galaxy.mp4"></video>
+
+  <!-- HERO -->
+  <header id="hero" class="hero">
+    <div class="hero-gradient-bg"></div>
+    <div class="hero-grid"></div>
+
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 d-flex" data-anim="left">
+          <div class="d-none d-md-flex align-items-center me-3">
+            <div class="neon-pill"></div>
+          </div>
+          <div>
+            <div class="hero-badges mb-3 d-flex flex-wrap gap-2">
+              <span>Zero Trust · Cloud · DevOps</span>
+            </div>
+            <h1 class="hero-title">
+              <span class="gradient-text">20+</span> years of service
+            </h1>
+            <p class="hero-subtitle mb-4">
+              From consulting to implementation, we offer a full spectrum of services to support your digital journey.
+			  We have successfully executed projects across the globe, from the US to the UK and beyond ...we are always committed to helping businesses - irnavigate the complexities of the digital world and achieve their goals.
+            </p>
+            <div class="d-flex flex-wrap gap-3 mb-4">
+              <a href="#services" class="btn btn-cta btn-lg">Explore Services</a>
+              <a href="#about" class="btn btn-outline-light btn-lg">
+                Our Approach
+              </a>
+            </div>
+            <div class="d-flex flex-wrap gap-4 small text-muted">
+              <div>
+                <span class="d-block fw-semibold text-light">150+</span>
+                global deployments
+              </div>
+              <div>
+                <span class="d-block fw-semibold text-light">99.99%</span>
+                uptime targets
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 hero-3d mt-4 mt-lg-0" data-anim="right">
+          <canvas id="heroCanvas"></canvas>
+          <div class="hero-hint">Drag to rotate · Scroll to zoom</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SERVICES -->
+  <section id="services" class="section bg-alt">
+    <div class="container">
+      <div class="section-heading" data-anim="zoom">
+        <h2>Services</h2>
+        <p>Every layer of your IT stack – architected, automated and secured.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="service-card tilt-card" data-anim="up">
+            <div class="service-icon">☁️</div>
+            <h3 class="service-title">Cloud Architecture & Migration</h3>
+            <p class="service-desc">
+              Design secure, scalable multi-cloud and hybrid infrastructures with
+              automated deployments and cost-aware blueprints.
+            </p>
+            <div class="service-tags">
+              <span>AWS · Azure · GCP</span>
+              <span>Kubernetes</span>
+              <span>IaC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="service-card tilt-card" data-anim="up">
+            <div class="service-icon">🛡️</div>
+            <h3 class="service-title">Zero Trust Security</h3>
+            <p class="service-desc">
+              Identity-centric security architecture with micro-segmentation,
+              device trust, continuous risk evaluation and 24/7 monitoring.
+            </p>
+            <div class="service-tags">
+              <span>SSO · MFA</span>
+              <span>EDR/XDR</span>
+              <span>Compliance</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="service-card tilt-card" data-anim="up">
+            <div class="service-icon">⚙️</div>
+            <h3 class="service-title">DevOps & SRE</h3>
+            <p class="service-desc">
+              CI/CD pipelines, observability stacks and SRE practices to keep your
+              releases fast, safe and measurable.
+            </p>
+            <div class="service-tags">
+              <span>CI/CD</span>
+              <span>Observability</span>
+              <span>SLO/SLA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section about">
+    <div class="about-bg"></div>
+    <div class="container">
+      <div class="row align-items-center gy-4">
+        <div class="col-lg-6" data-anim="left">
+          <span class="about-pill">About QuantumSphere</span>
+          <h2 class="mb-3">Architects of Zero-Downtime Infrastructure.</h2>
+          <p style="color: rgba(226,232,240,0.9);">
+            We are a distributed team of cloud architects, security engineers and SREs
+            obsessed with reliability and developer experience. From greenfield builds
+            to complex brownfield migrations, we design systems that are boring to run
+            and beautiful to visualize.
+          </p>
+          <p style="color: rgba(226,232,240,0.8);">
+            Our 3D infrastructure maps give you live, interactive visibility into apps,
+            data flows and security posture – making boardroom conversations radically
+            simpler.
+          </p>
+
+          <div class="about-stats">
+            <div class="stat-box">
+              <div class="stat-number">+150</div>
+              <div class="stat-label">Projects Delivered</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">24/7</div>
+              <div class="stat-label">Global NOC</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">&lt;30m</div>
+              <div class="stat-label">MTTR Targets</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-anim="right">
+          <div class="about-orbit-wrapper">
+            <div class="about-orbit">
+              <div class="about-orbit-inner">
+                <div class="orbit-node main">Control Plane</div>
+                <div class="orbit-node n1">Applications</div>
+                <div class="orbit-node n2">Cloud & Edge</div>
+                <div class="orbit-node n3">Security Mesh</div>
+              </div>
+            </div>
+          </div>
+          <p class="mt-3 text-center" style="color: rgba(226,232,240,0.85); font-size: 0.85rem;">
+            A living 3D map of your environment – services, clouds and security,
+            perfectly aligned.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="section info-section">
+    <div class="container">
+      <div class="section-heading" data-anim="zoom">
+        <h2>Our Experience</h2>
+        <p>Decades of hands-on delivery across IT, marketing and digital transformation.</p>
+      </div>
+
+      <div class="row gy-4">
+        <div class="col-lg-7" data-anim="left">
+          <div class="info-block">
+            <h3><span class="info-icon">💼</span>Deep, cross-industry experience</h3>
+            <p>
+              With 20+ years working across IT and marketing, we’ve supported organisations
+              from early-stage startups to global enterprises. Our team includes senior
+              architects, UX specialists and certified security experts who speak both
+              business and engineering.
+            </p>
+            <p>
+              We’ve delivered redesigns, migrations and greenfield builds under tight
+              timelines, strict compliance and challenging stakeholder landscapes.
+            </p>
+
+            <h3 class="mt-3"><span class="info-icon">💡</span>Ask us about:</h3>
+            <ul>
+              <li>UX / UI design and usability audits</li>
+              <li>Digital strategy &amp; roadmap definition</li>
+              <li>New software solutions and integrations</li>
+              <li>High-impact websites and portals</li>
+              <li>Social media &amp; brand visibility tooling</li>
+              <li>IT consultancy &amp; architecture reviews</li>
+              <li>Process modernisation &amp; automation</li>
+              <li>…and anything else you’re wrestling with.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-5" data-anim="right">
+          <div class="info-block">
+            <h3><span class="info-icon">🌍</span>Industry coverage</h3>
+            <p>
+              Our consultants have delivered complex projects in:
+            </p>
+            <ul>
+              <li>Banking, finance &amp; fintech</li>
+              <li>Healthcare &amp; life sciences</li>
+              <li>Retail, logistics &amp; supply chain</li>
+              <li>Public sector &amp; large NGOs</li>
+            </ul>
+            <p>
+              That diversity means we bring proven patterns, not experiments, to your
+              next initiative.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach" class="section info-section">
+    <div class="container">
+      <div class="section-heading" data-anim="zoom">
+        <h2>Our Approach</h2>
+        <p>Clear process, honest communication and a focus on outcomes.</p>
+      </div>
+
+      <div class="row gy-4">
+        <div class="col-lg-6" data-anim="left">
+          <div class="info-block">
+            <h3><span class="info-icon">🧭</span>Discovery &amp; design</h3>
+            <p>
+              Every engagement starts with discovery: mapping your current landscape,
+              understanding constraints and surfacing quick wins. We co-create a project
+              plan with timelines, milestones, metrics and risks so expectations are clear
+              from day one.
+            </p>
+            <p>
+              You get concise documentation, sketches and prototypes that stakeholders can
+              react to — not hundred-page PDFs nobody reads.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-anim="right">
+          <div class="info-block">
+            <h3><span class="info-icon">⚙️</span>Ramp-up &amp; execution</h3>
+            <p>
+              Our team works alongside yours, embedding best practices for version control,
+              testing, observability and security as we go, so the work is sustainable after
+              we leave.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-anim="left">
+          <div class="info-block">
+            <h3><span class="info-icon">🤝</span>Our Attitude</h3>
+            <p>
+              We don’t act like a distant vendor. We work with you at every stage,
+              ensuring decisions are understood, not just agreed. We’re selective about
+              the clients we partner with so we can stay fully invested in your success.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-anim="right">
+          <div class="info-block">
+            <h3><span class="info-icon">🌱</span>Our Culture</h3>
+            <p>
+              We believe in giving each team the time and guidance they deserve. Mentoring
+              your internal engineers and product owners is part of the engagement, not an
+              add-on. We reached this level with help from others — and we intend to pass
+              that on.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="whyus" class="section bg-alt">
+    <div class="container">
+      <div class="section-heading" data-anim="zoom">
+        <h2>Why us?</h2>
+        <p>What it feels like to work with us, beyond the tech.</p>
+      </div>
+
+      <div class="why-wrapper">
+        <!-- Left column -->
+        <div class="why-col" data-anim="left">
+          <span class="info-icon">⭐</span>
+          <h3>Why us?</h3>
+
+          <h4>Our Expertise:</h4>
+          <p>
+            We are experts in digital marketing, data management and analysis,
+            data interchange and integration software and analytical and
+            decision support software.
+          </p>
+
+          <h4>Our Experience:</h4>
+          <p>
+            We have a proven track record of delivering high-quality projects
+            for diverse markets worldwide. We specialize in understanding
+            varied business needs and market dynamics to drive successful
+            digital transformations that attract and retain customers.
+          </p>
+        </div>
+
+        <!-- Right column -->
+        <div class="why-col" data-anim="right">
+          <span class="info-icon">💬</span>
+
+          <h4>Our Attitude:</h4>
+          <p>
+            We endeavour to work with you at every stage, ensuring that your
+            specific goals are reached. Business mentors are key—that’s why
+            when it comes to client selection, we’re choosy.
+          </p>
+
+          <h4>Our Culture:</h4>
+          <p>
+            We want to give each of you the time and guidance they deserve.
+            We didn’t get there alone… and neither will you. Contact us today.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section bg-alt">
+    <div class="container">
+      <div class="section-heading" data-anim="zoom">
+        <h2>Client Stories</h2>
+        <p>Teams that turned fragile systems into dependable platforms.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <article class="testimonial-card" data-anim="up">
+            <p class="testimonial-quote">
+              “They moved 60+ microservices to Kubernetes with zero downtime.
+              The 3D environment view helped our execs finally understand our stack.”
+            </p>
+            <div class="testimonial-name">Anita Sharma</div>
+            <div class="testimonial-role">CTO · FinEdge Group</div>
+          </article>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <article class="testimonial-card" data-anim="up">
+            <p class="testimonial-quote">
+              “Zero Trust sounded like buzzword bingo until QuantumSphere implemented it.
+              Now every access path is visible, verified and auditable.”
+            </p>
+            <div class="testimonial-name">Luis Moreno</div>
+            <div class="testimonial-role">CISO · Orbital Health</div>
+          </article>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <article class="testimonial-card" data-anim="up">
+            <p class="testimonial-quote">
+              “Our release cycle dropped from monthly to daily with fewer incidents.
+              Their SRE playbooks are now our engineering culture.”
+            </p>
+            <div class="testimonial-name">Priya Iyer</div>
+            <div class="testimonial-role">VP Engineering · CloudWave</div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="row gy-4 align-items-start">
+        <div class="col-lg-5" data-anim="left">
+          <h2 class="mb-3">Let’s map your next architecture.</h2>
+          <p style="color: rgba(226,232,240,0.85);">
+            Share a few details about your environment and goals. We’ll respond with
+            a tailored architecture sketch and roadmap within one business day.
+          </p>
+          <ul class="list-unstyled contact-info mt-3">
+            <li><span>Email:</span>hello@quantumsphere.io</li>
+            <li><span>Phone:</span>+1 (800) 555-0175</li>
+            <li><span>HQ:</span>221B Cloud Street, Tech City</li>
+          </ul>
+        </div>
+
+        <div class="col-lg-7" data-anim="right">
+          <div class="contact-card">
+            <form id="contactForm" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="name" class="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    required
+                    placeholder="Your name" />
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Work Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    required
+                    placeholder="you@company.com" />
+                </div>
+                <div class="col-md-6">
+                  <label for="company" class="form-label">Company</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company"
+                    placeholder="Company name" />
+                </div>
+                <div class="col-md-6">
+                  <label for="size" class="form-label">Team Size</label>
+                  <select id="size" class="form-control">
+                    <option value="">Select…</option>
+                    <option>1–20</option>
+                    <option>21–100</option>
+                    <option>101–500</option>
+                    <option>500+</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="message" class="form-label">Project Brief</label>
+                  <textarea
+                    id="message"
+                    class="form-control"
+                    rows="4"
+                    required
+                    placeholder="What are you trying to achieve?"></textarea>
+                </div>
+              </div>
+
+              <button class="btn btn-cta w-100 mt-3" type="submit">
+                Request Architecture Session
+              </button>
+              <p id="formStatus" class="mt-2 text-center small"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <div>© <span id="year"></span> QuantumSphere IT. All rights reserved.</div>
+      <div class="mt-2 mt-md-0">
+        <a href="#hero" class="text-reset">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/three@0.164.1/build/three.min.js"></script>
+
+  <script>
+    // YEAR
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // SCROLL ANIMATIONS (trigger on scroll down AND up)
+    const animEls = document.querySelectorAll("[data-anim]");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");   // fade/slide in
+          } else {
+            entry.target.classList.remove("show"); // fade/slide out when leaving
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    animEls.forEach((el) => io.observe(el));
+
+    // PARALLAX ABOUT BG
+    const aboutBg = document.querySelector(".about-bg");
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      if (aboutBg) {
+        aboutBg.style.transform = `translateY(${scrollY * 0.15}px)`;
+      }
+    });
+
+    // TILT CARDS
+    document.querySelectorAll(".tilt-card").forEach((card) => {
+      const rect = () => card.getBoundingClientRect();
+      card.addEventListener("mousemove", (e) => {
+        const r = rect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        const midX = r.width / 2;
+        const midY = r.height / 2;
+        const rotateX = ((y - midY) / midY) * -8;
+        const rotateY = ((x - midX) / midX) * 8;
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        card.style.boxShadow =
+          "0 25px 60px rgba(15,23,42,0.95)";
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "rotateX(0) rotateY(0)";
+        card.style.boxShadow =
+          "0 18px 50px rgba(15,23,42,0.95)";
+      });
+    });
+
+    // CONTACT FORM (simple front-end validation)
+    const form = document.getElementById("contactForm");
+    const formStatus = document.getElementById("formStatus");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const required = ["name", "email", "message"];
+      let valid = true;
+
+      required.forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) {
+          el.classList.add("is-invalid");
+          valid = false;
+        } else {
+          el.classList.remove("is-invalid");
+        }
+      });
+
+      if (!valid) {
+        formStatus.textContent = "Please fill all required fields.";
+        formStatus.style.color = "#f97373";
+        return;
+      }
+
+      formStatus.textContent =
+        "Thank you! We’ve received your request and will contact you shortly.";
+      formStatus.style.color = "#4ade80";
+      form.reset();
+    });
+
+    // ============================
+    // THREE.JS HERO SCENE
+    // ============================
+    let scene, camera, renderer, rackGroup, rafId;
+
+    function initThree() {
+      const canvas = document.getElementById("heroCanvas");
+      if (!canvas) return;
+
+      const width = canvas.clientWidth || 600;
+      const height = canvas.clientHeight || 400;
+
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x020617, 0.04);
+
+      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+      camera.position.set(0, 1.5, 4);
+
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(width, height);
+
+      // Lights
+      const ambient = new THREE.AmbientLight(0x9ca3af, 0.7);
+      scene.add(ambient);
+
+      const keyLight = new THREE.DirectionalLight(0x22d3ee, 1.3);
+      keyLight.position.set(3, 4, 2);
+      scene.add(keyLight);
+
+      const fillLight = new THREE.PointLight(0x6366f1, 1.5, 15);
+      fillLight.position.set(-3, 2, -2);
+      scene.add(fillLight);
+
+      // Rack group
+      rackGroup = new THREE.Group();
+      scene.add(rackGroup);
+
+      const rackMat = new THREE.MeshStandardMaterial({
+        color: 0x020617,
+        metalness: 0.75,
+        roughness: 0.2,
+        emissive: 0x020617,
+      });
+
+      const towerGeom = new THREE.BoxGeometry(1.3, 2.4, 1);
+      const tower = new THREE.Mesh(towerGeom, rackMat);
+      tower.position.y = 1.2;
+      rackGroup.add(tower);
+
+      // LED bars
+      const ledGeom = new THREE.BoxGeometry(1.05, 0.04, 0.08);
+      const ledMat = new THREE.MeshStandardMaterial({
+        color: 0x22d3ee,
+        emissive: 0x22d3ee,
+        emissiveIntensity: 1.2,
+        metalness: 0.4,
+        roughness: 0.2,
+      });
+      for (let i = 0; i < 6; i++) {
+        const led = new THREE.Mesh(ledGeom, ledMat);
+        led.position.set(0, 0.5 + i * 0.3, 0.52);
+        rackGroup.add(led);
+      }
+
+      // Side glow panels
+      const panelGeom = new THREE.BoxGeometry(0.12, 1.4, 0.1);
+      const panelMat = new THREE.MeshStandardMaterial({
+        color: 0x6366f1,
+        emissive: 0x6366f1,
+        emissiveIntensity: 1.0,
+      });
+      const leftPanel = new THREE.Mesh(panelGeom, panelMat);
+      leftPanel.position.set(-0.7, 1.3, 0.52);
+      const rightPanel = leftPanel.clone();
+      rightPanel.position.x = 0.7;
+      rackGroup.add(leftPanel, rightPanel);
+
+      // Floating microservice cubes
+      const floatGeom = new THREE.BoxGeometry(0.35, 0.35, 0.35);
+      const colors = [0x22d3ee, 0x6366f1, 0xf97316];
+      for (let i = 0; i < 5; i++) {
+        const color = colors[i % colors.length];
+        const mat = new THREE.MeshStandardMaterial({
+          color,
+          emissive: color,
+          emissiveIntensity: 0.7,
+          metalness: 0.4,
+          roughness: 0.2,
+        });
+        const cube = new THREE.Mesh(floatGeom, mat);
+        cube.position.set(
+          Math.sin(i * 1.2) * 1.7,
+          1.2 + (i % 2) * 0.6,
+          Math.cos(i * 1.2) * 1.2
+        );
+        cube.userData.offset = i * 0.8;
+        rackGroup.add(cube);
+      }
+
+      // Floor grid
+      const grid = new THREE.GridHelper(12, 24, 0x1f2937, 0x0b1120);
+      grid.position.y = 0;
+      scene.add(grid);
+
+      // Interaction (drag rotate + wheel zoom)
+      let isDragging = false;
+      let prevX = 0;
+      let rotationTarget = 0;
+
+      const onPointerDown = (clientX) => {
+        isDragging = true;
+        prevX = clientX;
+      };
+      const onPointerMove = (clientX) => {
+        if (!isDragging) return;
+        const delta = clientX - prevX;
+        prevX = clientX;
+        rotationTarget += delta * 0.005;
+      };
+      const stopDragging = () => {
+        isDragging = false;
+      };
+
+      canvas.addEventListener("mousedown", (e) => onPointerDown(e.clientX));
+      window.addEventListener("mouseup", stopDragging);
+      window.addEventListener("mousemove", (e) => onPointerMove(e.clientX));
+
+      canvas.addEventListener(
+        "touchstart",
+        (e) => {
+          onPointerDown(e.touches[0].clientX);
+        },
+        { passive: true }
+      );
+      window.addEventListener(
+        "touchend",
+        () => {
+          stopDragging();
+        },
+        { passive: true }
+      );
+      window.addEventListener(
+        "touchmove",
+        (e) => {
+          onPointerMove(e.touches[0].clientX);
+        },
+        { passive: true }
+      );
+
+      canvas.addEventListener(
+        "wheel",
+        (e) => {
+          e.preventDefault();
+          camera.position.z += e.deltaY * 0.002;
+          camera.position.z = Math.max(2.6, Math.min(7, camera.position.z));
+        },
+        { passive: false }
+      );
+
+      // Resize
+      window.addEventListener("resize", () => {
+        const w = canvas.clientWidth || width;
+        const h = canvas.clientHeight || height;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+
+      const clock = new THREE.Clock();
+
+      const animate = () => {
+        const t = clock.getElapsedTime();
+
+        rackGroup.rotation.y += (rotationTarget - rackGroup.rotation.y) * 0.06;
+        rackGroup.rotation.x = 0.2 + Math.sin(t * 0.3) * 0.04;
+
+        rackGroup.children.forEach((child) => {
+          if (child.geometry && child.geometry.parameters.height === 0.35) {
+            const offset = child.userData.offset || 0;
+            child.position.y = 1.2 + Math.sin(t * 1.5 + offset) * 0.25;
+          }
+        });
+
+        renderer.render(scene, camera);
+        rafId = requestAnimationFrame(animate);
+      };
+
+      animate();
+    }
+
+    window.addEventListener("load", initThree);
+    window.addEventListener("beforeunload", () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      if (renderer) renderer.dispose();
+    });
+  </script>
+</body>
+</html>
