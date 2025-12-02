@@ -144,8 +144,8 @@
   body::after {
     background-image:
       radial-gradient(1px 1px at 40px 30px, #22f2ff, transparent 60%),
-      radial-gradient(1px 1px at 120px 160px, #4f46e5, transparent 60%),
-      radial-gradient(1px 1px at 200px 80px, #f97316, transparent 60%);
+      radial-gradient(1px 1px at 120px 160px, #574fec, transparent 60%),
+      radial-gradient(1px 1px at 200px 80px, #dd7830, transparent 60%);
     background-size: 260px 260px;
     opacity: 0.3;
     animation: starsDrift2 220s linear infinite;
@@ -225,10 +225,14 @@
   }
 
   .brand-logo {
-    width: 26px;
-    height: 26px;
+    width: 50px;
+    height: 50px;
     border-radius: 10px;
-    background: conic-gradient(
+    background-image: url("img/logo.png"), url("logo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    /*background: conic-gradient(
       from 90deg,
       var(--accent),
       var(--accent-2),
@@ -236,7 +240,7 @@
       var(--accent)
     );
     box-shadow: 0 0 25px rgba(56, 189, 248, 0.9);
-    transform: rotate3d(1, 1, 0, 25deg);
+    transform: rotate3d(1, 1, 0, 25deg);*/
   }
 
   .nav-link {
@@ -812,8 +816,10 @@
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container py-2">
       <a class="navbar-brand" href="#hero">
-        <div class="brand-logo"></div>
-        Titan-Consultancy
+        <div class="brand-logo">
+
+        </div>
+        
       </a>
       <button
         class="navbar-toggler"
