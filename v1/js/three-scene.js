@@ -1,1 +1,0 @@
-// Placeholder three-scene.js
