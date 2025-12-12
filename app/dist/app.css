@@ -5538,3 +5538,7 @@ section.banner.s3.s2 .container .swiper-button-prev {
 }
 
 /*# sourceMappingURL=app.css.map */
+.margin-center 
+{
+    margin: 0 auto;
+}
