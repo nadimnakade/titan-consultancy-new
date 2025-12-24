@@ -1,0 +1,37 @@
+{
+    "hero": {
+        "heading": "Titan-Consultancy",
+        "description": "A Maltese-Indo IT consultancy company specializing in providing end-to-end IT solutions to businesses of all sizes.",
+        "button": "Get Connected"
+    },
+    "cards": {
+        "card1": {
+            "title": "Digital Transformation"
+        },
+        "card2": {
+            "title": "Content That Delivers Results"
+        },
+        "card3": {
+            "title": "Web Design"
+        },
+        "card4": {
+            "title": "Business Strategy"
+        },
+        "card5": {
+            "title": "Human Resource"
+        },
+        "card6": {
+            "title": "Digital Marketing Strategy"
+        },
+        "card7": {
+            "title": "Business Analyst"
+        }
+    },
+    "about": {
+        "subheading": "About us",
+        "heading": "Titan Consultancy",
+        "description1": "Over 20 years of experience in the industry, we have helped hundreds of clients achieve their business goals.",
+        "description2": "We have successfully executed projects across the globe, from the US to the UK and beyond ...we are always committed to helping businesses - irnavigate the complexities of the digital world and achieve their goals.",
+        "button": "More About Us"
+    }
+}

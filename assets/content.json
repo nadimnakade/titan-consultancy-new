@@ -1,0 +1,73 @@
+{
+    "hero": {
+        "heading": "Titan-Consultancy",
+        "description": "A Maltese-Indo IT consultancy company specializing in providing end-to-end IT solutions to businesses of all sizes.",
+        "button": "Get Connected"
+    },
+    "cards": {
+        "card1": {
+            "title": "Digital Transformation"
+        },
+        "card2": {
+            "title": "Content That Delivers Results"
+        },
+        "card3": {
+            "title": "Web Design"
+        },
+        "card4": {
+            "title": "Business Strategy"
+        },
+        "card5": {
+            "title": "Human Resource"
+        },
+        "card6": {
+            "title": "Digital Marketing Strategy"
+        },
+        "card7": {
+            "title": "Business Analyst"
+        }
+    },
+    "about": {
+        "subheading": "About us",
+        "heading": "Titan Consultancy",
+        "description1": "Over 20 years of experience in the industry, we have helped hundreds of clients achieve their business goals.",
+        "description2": "We have successfully executed projects across the globe, from the US to the UK and beyond ...we are always committed to helping businesses - irnavigate the complexities of the digital world and achieve their goals.",
+        "button": "More About Us"
+    },
+    "approach": {
+        "heading": "Our Approach",
+        "description": "Our service includes a comprehensive consult to help identify gaps and opportunities, a comprehensive report that includes a project plan with timelines and milestones, a cost analysis, and a schedule. We also offer a suite of quality products that will help you get there quickly and smoothly. Our approach and technique reduces the communication gap between your business and clients.",
+        "subheading": "Empowering Your Success"
+    },
+    "services": {
+        "heading": "Our Expertise",
+        "subheading": "What We Do",
+        "description": "We offer a wide range of services to help your business grow and succeed in the digital age.",
+        "items": [
+            {
+                "title": "Actionable Digital Marketing Strategy",
+                "image": "assets/images/layouts/item-13.jpg"
+            },
+            {
+                "title": "Memorable & Effective Branding",
+                "image": "assets/images/layouts/item-14.jpg"
+            },
+            {
+                "title": "Content That Delivers Results",
+                "image": "assets/images/layouts/item-15.jpg"
+            },
+            {
+                "title": "UI/UX Design & Consulting",
+                "image": "assets/images/layouts/item-16.jpg"
+            },
+            {
+                "title": "Graphic Design",
+                "image": "assets/images/layouts/item-18.jpg"
+            },
+            {
+                "title": "Usability Analysis & Testing",
+                "image": "assets/images/layouts/item-19.jpg"
+            }
+        ]
+    }
+}
